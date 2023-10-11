@@ -27,6 +27,10 @@ h1 {
   margin-left: 100px;
 }
 
+.focused :focus {
+  border: 2px solid #95fff9;
+}
+
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -48,10 +52,6 @@ h1 {
   align-items: center;
   flex-direction: column;
   gap: 20px;
-}
-
-.photographer_section article :focus {
-  border: 2px solid #95fff9;
 }
 
 .photographer_section article img {

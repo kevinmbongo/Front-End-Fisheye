@@ -4,7 +4,7 @@ async function getPhotographers() {
   const reponse = await fetch("./data/photographers.json");
   let photographers = await reponse.json();
   // et bien retourner le tableau photographers seulement une fois récupéré
-  console.log(photographers);
+  console.log({ ...photographers });
   return {
     ...photographers,
   };
@@ -15,7 +15,7 @@ async function displayData(photographers) {
 
   photographers.forEach((photographer) => {
     const photographerModel = photographerTemplate(photographer);
-    console.log(photographer);
+
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
