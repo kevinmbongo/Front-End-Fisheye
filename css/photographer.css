@@ -5,7 +5,7 @@
   margin: 0 100px;
 }
 
-.photograph-header {
+.photograph_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,40 +13,70 @@
   background-color: #fafafa;
   height: 300px;
 }
-.photograph-header h2 {
+.photograph_header h2 {
   font-weight: 400;
   font-size: 64px;
   color: #d3573c;
   margin: 0;
 }
-.photograph-header div {
+.photograph_header div {
   display: flex;
   flex-direction: column;
   gap: 19px;
 }
-.photograph-header p {
+.photograph_header p {
   font-size: 24px;
   color: #901c1c;
   margin: 0;
 }
 
-.photograph-header span {
+.photograph_header span {
   font-size: 18px;
   color: #757575;
 }
 
-.photograph-header img {
+.photograph_header img {
   height: 200px;
   width: 200px;
   border-radius: 50%;
 }
 
-.photograph-article {
+.sort {
+  margin: 30px 0 60px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.photograph_article {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 50px;
 }
 
+.photograph_article article div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  color: #901c1c;
+}
+
+.photograph_article .likes_container {
+  display: flex;
+  gap: 5px;
+}
+
+.picture {
+  height: 300px;
+  width: 350px;
+  border-radius: 5px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.picture:hover {
+  opacity: 0.8;
+}
 .contact_button {
   font-size: 20px;
   font-weight: bold;

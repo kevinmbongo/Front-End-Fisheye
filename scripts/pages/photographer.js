@@ -3,13 +3,15 @@ async function getPagePhotographers() {
   // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
   // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
   const reponse = await fetch("./data/photographers.json");
+
   let photographers = await reponse.json();
+
   // et bien retourner le tableau photographers seulement une fois récupéré
   return {
     photographers,
   };
 }
-const idPage = window.location.search.slice(4);
+
 function getMediaByPhotographerId(mediaArray, id) {
   const filteredMedia = mediaArray.filter(
     (media) => media.photographerId === id
@@ -27,6 +29,11 @@ function getCurrentPhotographerById(photographers, currentId) {
 }
 
 async function displayData(photographers) {
+  let paramsString = window.location.search;
+  let searchParams = new URLSearchParams(paramsString);
+
+  let idPage = searchParams.get("id");
+
   const currentPhotographer = getCurrentPhotographerById(
     photographers.photographers,
     parseInt(idPage)
@@ -34,7 +41,7 @@ async function displayData(photographers) {
   console.log(currentPhotographer);
   const { name, portrait, city, country, tagline } = currentPhotographer[0];
 
-  const photographMain = document.querySelector(".photograph-article");
+  const photographMain = document.querySelector(".photograph_article");
   const infoProfile = document.querySelector(".info_profile");
   const photoProfile = document.querySelector("#photo_profile");
   const photographerName = document.createElement("h2");
@@ -44,7 +51,10 @@ async function displayData(photographers) {
   const photographerTagline = document.createElement("span");
   photographerTagline.textContent = tagline;
   const photographerPortrait = document.createElement("img");
-  photographerPortrait.setAttribute("src", `assets/photographers/${portrait}`);
+  photographerPortrait.setAttribute(
+    "src",
+    `assets/images/portraits/${portrait}`
+  );
   photographerPortrait.setAttribute("alt", name);
 
   infoProfile.appendChild(photographerName);
@@ -62,6 +72,7 @@ async function displayData(photographers) {
   mediaFound.forEach((photographer) => {
     const photographerPageModel = photographerPage(photographer);
     const userCardDOM = photographerPageModel.getPageDOM();
+
     photographMain.appendChild(userCardDOM);
   });
 }
@@ -69,6 +80,7 @@ async function displayData(photographers) {
 async function init() {
   // Récupère les datas des photographes
   const { photographers } = await getPagePhotographers();
+
   displayData(photographers);
 }
 
