@@ -12,6 +12,19 @@ async function getPagePhotographers() {
   };
 }
 
+function svgBlackHeart() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 18" fill="none">
+  <g clip-path="url(#clip0_120_618)">
+    <path d="M11.125 21.35L9.85625 20.03C5.35 15.36 2.375 12.28 2.375 8.5C2.375 5.42 4.4925 3 7.1875 3C8.71 3 10.1712 3.81 11.125 5.09C12.0787 3.81 13.54 3 15.0625 3C17.7575 3 19.875 5.42 19.875 8.5C19.875 12.28 16.9 15.36 12.3938 20.04L11.125 21.35Z" fill="black"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_120_618">
+      <rect width="21" height="24" fill="white" transform="translate(0.625)"/>
+    </clipPath>
+  </defs>
+</svg>`;
+}
+
 function getMediaByPhotographerId(mediaArray, id) {
   const filteredMedia = mediaArray.filter(
     (media) => media.photographerId === id
@@ -39,7 +52,8 @@ async function displayData(photographers) {
     parseInt(idPage)
   );
   console.log(currentPhotographer);
-  const { name, portrait, city, country, tagline } = currentPhotographer[0];
+  const { name, portrait, city, country, tagline, price } =
+    currentPhotographer[0];
 
   const photographMain = document.querySelector(".photograph_article");
   const infoProfile = document.querySelector(".info_profile");
@@ -56,11 +70,28 @@ async function displayData(photographers) {
     `assets/images/portraits/${portrait}`
   );
   photographerPortrait.setAttribute("alt", name);
+  const sort = document.querySelector(".sort");
+  const sortList = document.createElement("div");
+  sortList.setAttribute("class", "sort_list");
+
+  const snackbar = document.querySelector(".snackbar");
+  const svgHeart = document.createElement("div");
+  svgHeart.innerHTML = svgBlackHeart();
+  const likesContainer = document.createElement("div");
+  likesContainer.setAttribute("class", "profile_likes_container");
+  const likesProfile = document.createElement("span");
+  likesProfile.textContent = "LIKES";
+  const adr = document.createElement("span");
+  adr.textContent = `${price}€ / jour`;
 
   infoProfile.appendChild(photographerName);
   infoProfile.appendChild(photographerLocation);
   infoProfile.appendChild(photographerTagline);
   photoProfile.appendChild(photographerPortrait);
+  snackbar.appendChild(likesContainer);
+  likesContainer.appendChild(likesProfile);
+  likesContainer.appendChild(svgHeart);
+  snackbar.appendChild(adr);
 
   const mediaFound = getMediaByPhotographerId(
     photographers.media,

@@ -3,6 +3,7 @@
 }
 .container {
   margin: 0 100px;
+  position: relative;
 }
 
 .photograph_header {
@@ -46,11 +47,32 @@
   font-size: 18px;
   font-weight: 700;
 }
+.customSelect {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  background-color: #901c1c;
+  cursor: pointer;
+  outline: none;
+}
 
 .photograph_article {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 50px;
+}
+
+.photograph_article article {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .photograph_article article div {
@@ -88,6 +110,27 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.snackbar {
+  position: fixed;
+  bottom: 0;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 65px;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 21px 36px;
+  border-radius: 5px;
+  background: #db8876;
+}
+
+.profile_likes_container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .modal {
