@@ -25,6 +25,16 @@ function svgBlackHeart() {
 </svg>`;
 }
 
+function sommeLikes(objets) {
+  let somme = 0;
+  objets.forEach(function (objet) {
+    if (objet.likes) {
+      somme += objet.likes;
+    }
+  });
+  return somme;
+}
+
 function getMediaByPhotographerId(mediaArray, id) {
   const filteredMedia = mediaArray.filter(
     (media) => media.photographerId === id
@@ -73,6 +83,10 @@ async function displayData(photographers) {
   const sort = document.querySelector(".sort");
   const sortList = document.createElement("div");
   sortList.setAttribute("class", "sort_list");
+  const mediaFound = getMediaByPhotographerId(
+    photographers.media,
+    parseInt(idPage)
+  );
 
   const snackbar = document.querySelector(".snackbar");
   const svgHeart = document.createElement("div");
@@ -80,7 +94,7 @@ async function displayData(photographers) {
   const likesContainer = document.createElement("div");
   likesContainer.setAttribute("class", "profile_likes_container");
   const likesProfile = document.createElement("span");
-  likesProfile.textContent = "LIKES";
+  likesProfile.textContent = sommeLikes(mediaFound);
   const adr = document.createElement("span");
   adr.textContent = `${price}€ / jour`;
 
@@ -93,17 +107,11 @@ async function displayData(photographers) {
   likesContainer.appendChild(svgHeart);
   snackbar.appendChild(adr);
 
-  const mediaFound = getMediaByPhotographerId(
-    photographers.media,
-    parseInt(idPage)
-  );
-
-  console.log(mediaFound);
-
   mediaFound.forEach((photographer) => {
     const photographerPageModel = photographerPage(photographer);
     const userCardDOM = photographerPageModel.getPageDOM();
 
+    console.log(mediaFound);
     photographMain.appendChild(userCardDOM);
   });
 }

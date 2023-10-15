@@ -1,6 +1,15 @@
 #contact_modal {
   display: none;
 }
+
+.blur {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  background: rgba(255, 255, 255, 0.7);
+}
+
 .container {
   margin: 0 100px;
   position: relative;
@@ -99,6 +108,7 @@
 .picture:hover {
   opacity: 0.8;
 }
+
 .contact_button {
   font-size: 20px;
   font-weight: bold;
@@ -134,9 +144,14 @@
 }
 
 .modal {
+  position: fixed;
+  z-index: 10;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
   border-radius: 5px;
   background-color: #db8876;
-  width: 50%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,6 +163,12 @@
 .modal header {
   justify-content: space-between;
   width: 100%;
+  gap: 90px;
+  padding-bottom: 20px;
+}
+.modal header div {
+  display: flex;
+  flex-direction: column;
 }
 
 .modal header img {
@@ -155,9 +176,12 @@
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 58px;
   font-weight: normal;
-  text-align: center;
+  white-space: nowrap;
+  line-height: 64px;
+  margin: 0;
+  padding: 0;
 }
 
 form {
@@ -175,6 +199,7 @@ form label {
 form div {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   width: 100%;
   align-items: self-start;
   margin-bottom: 26px;
@@ -185,4 +210,13 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-size: 24px;
+}
+
+form textarea {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
 }
