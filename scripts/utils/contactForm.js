@@ -68,17 +68,10 @@ async function displayDataModule(photographers) {
   });
 }
 
-async function init() {
+export async function initModal() {
   // Récupère les datas des photographes
   const { photographers } = await getModulePhotographers();
   displayDataModule(photographers);
 }
 
-init();
-
-document
-  .getElementById(".submit_button")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log("click");
-  });
+initModal();

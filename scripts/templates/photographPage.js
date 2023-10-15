@@ -1,4 +1,4 @@
-function photographerPage(data) {
+export function photographerPage(data) {
   const { title, likes, video, image } = data;
 
   const isVideo = data.hasOwnProperty("video");

@@ -1,16 +1,22 @@
+import { getPhotographers } from "../utils/functionTest.js";
+
+import { photographerPage } from "../templates/photographPage.js";
+
+import { initModal } from "../utils/contactForm.js";
+
 //Mettre le code JavaScript lié à la page photographer.html
-async function getPagePhotographers() {
-  // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
-  // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-  const reponse = await fetch("./data/photographers.json");
+// async function getPagePhotographers() {
+//   // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
+//   // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
+//   const reponse = await fetch("./data/photographers.json");
 
-  let photographers = await reponse.json();
+//   let photographers = await reponse.json();
 
-  // et bien retourner le tableau photographers seulement une fois récupéré
-  return {
-    photographers,
-  };
-}
+//   // et bien retourner le tableau photographers seulement une fois récupéré
+//   return {
+//     photographers,
+//   };
+// }
 
 function svgBlackHeart() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 18" fill="none">
@@ -42,13 +48,14 @@ function getMediaByPhotographerId(mediaArray, id) {
 
   return filteredMedia;
 }
+const photographers = await getPhotographers();
 
 function getCurrentPhotographerById(photographers, currentId) {
-  const filteredphotographers = photographers.filter(
+  const filteredPhotographers = photographers?.filter(
     (photographer) => photographer.id === currentId
   );
 
-  return filteredphotographers;
+  return filteredPhotographers;
 }
 
 async function displayData(photographers) {
@@ -118,8 +125,8 @@ async function displayData(photographers) {
 
 async function init() {
   // Récupère les datas des photographes
-  const { photographers } = await getPagePhotographers();
-
+  const { photographers } = await getPhotographers();
+  initModal();
   displayData(photographers);
 }
 
