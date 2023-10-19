@@ -22,9 +22,7 @@
       <div class="photograph_header" id="main_header">
         <div class="info_profile"></div>
 
-        <button class="contact_button" onclick="displayModal()">
-          Contactez-moi
-        </button>
+        <button class="contact_button" id="open_modal">Contactez-moi</button>
 
         <div id="photo_profile"></div>
       </div>
@@ -50,7 +48,7 @@
             <h2>Contactez-moi</h2>
             <h2 id="name_photographer"></h2>
           </div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" id="close_modal" />
         </header>
 
         <form id="form">
@@ -72,7 +70,6 @@
         </form>
       </div>
     </div>
-
     <script type="module" src="/scripts/pages/photographer.js"></script>
   </body>
 </html>

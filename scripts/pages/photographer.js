@@ -48,10 +48,9 @@ function getMediaByPhotographerId(mediaArray, id) {
 
   return filteredMedia;
 }
-const photographers = await getPhotographers();
 
 function getCurrentPhotographerById(photographers, currentId) {
-  const filteredPhotographers = photographers?.filter(
+  const filteredPhotographers = photographers?.photographers.filter(
     (photographer) => photographer.id === currentId
   );
 
@@ -65,10 +64,11 @@ async function displayData(photographers) {
   let idPage = searchParams.get("id");
 
   const currentPhotographer = getCurrentPhotographerById(
-    photographers.photographers,
+    photographers,
     parseInt(idPage)
   );
   console.log(currentPhotographer);
+
   const { name, portrait, city, country, tagline, price } =
     currentPhotographer[0];
 
@@ -118,16 +118,14 @@ async function displayData(photographers) {
     const photographerPageModel = photographerPage(photographer);
     const userCardDOM = photographerPageModel.getPageDOM();
 
-    console.log(mediaFound);
     photographMain.appendChild(userCardDOM);
   });
 }
 
 async function init() {
   // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
-  initModal();
+  const photographers = await getPhotographers();
   displayData(photographers);
+  initModal();
 }
-
-init();
+document.addEventListener("DOMContentLoaded", init);

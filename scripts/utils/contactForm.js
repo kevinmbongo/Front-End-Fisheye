@@ -1,15 +1,15 @@
-function displayModal() {
+export function displayModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "block";
 }
 
-function closeModal() {
+export function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 
   // close when click anywhere outside of the modal
   window.onclick = function (event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
       closeModal();
     }
   };
@@ -49,7 +49,11 @@ async function displayDataModule(photographers) {
   console.log(currentPhotographer);
   const { name } = currentPhotographer[0];
 
-  const modal = document.getElementById("contact_modal");
+  const openModal = document.getElementById("open_modal");
+  openModal.addEventListener("click", () => displayModal());
+  const hideModal = document.getElementById("close_modal");
+  hideModal.addEventListener("click", () => closeModal());
+
   const namePhotographer = document.getElementById("name_photographer");
   namePhotographer.textContent = name;
 
@@ -73,5 +77,3 @@ export async function initModal() {
   const { photographers } = await getModulePhotographers();
   displayDataModule(photographers);
 }
-
-initModal();
