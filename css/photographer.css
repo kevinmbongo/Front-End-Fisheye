@@ -196,13 +196,17 @@ form label {
   font-size: 36px;
 }
 
-form div {
+form .input_container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   align-items: self-start;
   margin-bottom: 26px;
+}
+
+form .input_container div {
+  width: 100%;
 }
 
 form input {
@@ -219,4 +223,23 @@ form textarea {
   border: none;
   border-radius: 5px;
   font-size: 24px;
+}
+.error {
+  position: relative;
+}
+.error input {
+  border: 2px solid red;
+}
+.error textarea {
+  border: 2px solid red;
+}
+
+.error::after {
+  position: absolute;
+  right: 0;
+  bottom: -25px;
+  content: attr(data-error);
+  color: red;
+  font-size: 16px;
+  margin: 0;
 }

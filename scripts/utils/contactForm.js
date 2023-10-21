@@ -42,11 +42,16 @@ async function displayDataModule(photographers) {
 
   let idPage = searchParams.get("id");
 
+  // error messages
+  const errorMessage =
+    "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+
+  const emailMessage = "Veuillez entrer une adresse mail valide.";
+
   const currentPhotographer = getCurrentPhotographerByIdModule(
     photographers.photographers,
     parseInt(idPage)
   );
-  console.log(currentPhotographer);
   const { name } = currentPhotographer[0];
 
   const openModal = document.getElementById("open_modal");
@@ -57,18 +62,75 @@ async function displayDataModule(photographers) {
   const namePhotographer = document.getElementById("name_photographer");
   namePhotographer.textContent = name;
 
+  // check the validity of value
+  function validInputValue(balise, message) {
+    if (balise.value.length < 2) {
+      balise.parentElement.setAttribute("data-error-visible", "true");
+      balise.parentElement.setAttribute("data-error", message);
+      balise.parentElement.setAttribute("class", "error");
+
+      return false;
+    } else {
+      balise.parentElement.removeAttribute("data-error-visible");
+      balise.parentElement.removeAttribute("data-error");
+      balise.parentElement.removeAttribute("class");
+      return true;
+    }
+  }
+
+  // check email validity
+  function validEmail(balise, message) {
+    let emailRegExp = /[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+/;
+    if (emailRegExp.test(balise.value)) {
+      balise.parentElement.removeAttribute("data-error-visible");
+      balise.parentElement.removeAttribute("data-error");
+      balise.parentElement.removeAttribute("class");
+      return true;
+    } else {
+      balise.parentElement.setAttribute("data-error-visible", "true");
+      balise.parentElement.setAttribute("data-error", message);
+      balise.parentElement.setAttribute("class", "error");
+      return false;
+    }
+  }
+
   // submit event
   const form = document.getElementById("form");
   const firstName = document.getElementById("firstName");
-  const nameInput = document.getElementById("name");
+  const lastName = document.getElementById("lastName");
   const email = document.getElementById("email");
   const message = document.getElementById("message_area");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    console.log(
-      `firstName: ${firstName.value} name: ${nameInput.value} email: ${email.value} message: ${message.value}`
-    );
+    if (
+      !validInputValue(firstName, errorMessage) ||
+      !validInputValue(lastName, errorMessage) ||
+      !validEmail(email, emailMessage) ||
+      !validInputValue(message, errorMessage)
+    ) {
+      return false;
+    } else {
+      console.log(
+        `firstName: ${firstName.value} name: ${lastName.value}; 
+        email: ${email.value} message: ${message.value}`
+      );
+    }
+  });
+
+  // check validity on change event
+  firstName.addEventListener("change", () => {
+    validInputValue(firstName, errorMessage);
+  });
+  lastName.addEventListener("change", () => {
+    validInputValue(lastName, errorMessage);
+  });
+
+  email.addEventListener("change", () => {
+    validEmail(email, emailMessage);
+  });
+  message.addEventListener("change", () => {
+    validInputValue(message, errorMessage);
   });
 }
 

@@ -50,20 +50,25 @@
           </div>
           <img src="assets/icons/close.svg" id="close_modal" />
         </header>
-
         <form id="form">
-          <div>
-            <label for="prenom">Prénom</label>
-            <input id="firstName" type="text" name="prenom" />
+          <div class="input_container">
+            <div id="firstName_container">
+              <label for="prenom">Prénom</label>
+              <input id="firstName" type="text" name="prenom" />
+            </div>
 
-            <label for="name">Nom</label>
-            <input id="name" type="text" name="nom" />
-
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" />
-
-            <label for="message">Votre message</label>
-            <textarea id="message_area" name="message"></textarea>
+            <div>
+              <label for="lastName">Nom</label>
+              <input id="lastName" type="text" name="nom" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" name="email" />
+            </div>
+            <div>
+              <label for="message">Votre message</label>
+              <textarea id="message_area" name="message"></textarea>
+            </div>
           </div>
 
           <button class="contact_button">Envoyer</button>
