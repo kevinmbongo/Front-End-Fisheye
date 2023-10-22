@@ -97,6 +97,9 @@
   gap: 5px;
 }
 
+.svg_heart {
+  cursor: pointer;
+}
 .picture {
   height: 300px;
   width: 350px;

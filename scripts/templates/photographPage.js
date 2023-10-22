@@ -29,8 +29,9 @@ export function photographerPage(data) {
     const titleImg = document.createElement("span");
     titleImg.textContent = title;
 
-    const likesProfile = document.createElement("span");
-    likesProfile.textContent = likes;
+    const likesArticle = document.createElement("span");
+    likesArticle.setAttribute("class", "likes_value");
+    likesArticle.textContent = likes;
 
     const mediaTag = isVideo
       ? document.createElement("video")
@@ -42,15 +43,19 @@ export function photographerPage(data) {
 
     const svgElement = document.createElement("div");
     svgElement.innerHTML = svgHeart();
+    svgElement.setAttribute("class", "svg_heart");
 
     articlePhoto.appendChild(mediaTag);
 
     articlePhoto.appendChild(infoPicture);
     infoPicture.appendChild(titleImg);
     infoPicture.appendChild(likesContainer);
-    likesContainer.appendChild(likesProfile);
+    likesContainer.appendChild(likesArticle);
     likesContainer.appendChild(svgElement);
-
+    svgElement.addEventListener("click", () => {
+      const newLikes = likes + 1;
+      likesArticle.textContent = newLikes;
+    });
     return articlePhoto;
   }
 

@@ -4,20 +4,6 @@ import { photographerPage } from "../templates/photographPage.js";
 
 import { initModal } from "../utils/contactForm.js";
 
-//Mettre le code JavaScript lié à la page photographer.html
-// async function getPagePhotographers() {
-//   // Ceci est un exemple de données pour avoir un affichage de photographes de test dès le démarrage du projet,
-//   // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
-//   const reponse = await fetch("./data/photographers.json");
-
-//   let photographers = await reponse.json();
-
-//   // et bien retourner le tableau photographers seulement une fois récupéré
-//   return {
-//     photographers,
-//   };
-// }
-
 function svgBlackHeart() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 18" fill="none">
   <g clip-path="url(#clip0_120_618)">
@@ -29,16 +15,6 @@ function svgBlackHeart() {
     </clipPath>
   </defs>
 </svg>`;
-}
-
-function sommeLikes(objets) {
-  let somme = 0;
-  objets.forEach(function (objet) {
-    if (objet.likes) {
-      somme += objet.likes;
-    }
-  });
-  return somme;
 }
 
 function getMediaByPhotographerId(mediaArray, id) {
@@ -101,7 +77,7 @@ async function displayData(photographers) {
   const likesContainer = document.createElement("div");
   likesContainer.setAttribute("class", "profile_likes_container");
   const likesProfile = document.createElement("span");
-  likesProfile.textContent = sommeLikes(mediaFound);
+
   const adr = document.createElement("span");
   adr.textContent = `${price}€ / jour`;
 
@@ -114,12 +90,44 @@ async function displayData(photographers) {
   likesContainer.appendChild(svgHeart);
   snackbar.appendChild(adr);
 
+  let totalLikes = 0;
+
   mediaFound.forEach((photographer) => {
     const photographerPageModel = photographerPage(photographer);
     const userCardDOM = photographerPageModel.getPageDOM();
 
+    const span = userCardDOM.querySelector(".likes_value");
+    const svgHeart = userCardDOM.querySelector(".svg_heart");
+
+    const content = span.textContent;
+    const contentNumber = parseFloat(content);
+    // incrémentation du total des likes
+    if (span) {
+      if (!isNaN(contentNumber)) {
+        totalLikes += contentNumber;
+      }
+    }
+
+    let clicked = false;
+    // function qui gere le click sur le coeur
+    const clickHandler = () => {
+      if (clicked) {
+        return;
+      }
+      totalLikes += 1;
+      console.log("click totale : " + totalLikes);
+      likesProfile.textContent = totalLikes;
+      clicked = true;
+    };
+    // mise à jour du total des likes au click
+    svgHeart.addEventListener("click", clickHandler);
+
     photographMain.appendChild(userCardDOM);
   });
+
+  // Affichez la somme totale après la boucle
+  console.log("Somme totale : " + totalLikes);
+  likesProfile.textContent = totalLikes;
 }
 
 async function init() {
