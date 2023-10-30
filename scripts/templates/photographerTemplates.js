@@ -22,6 +22,7 @@ export function photographerTemplate(data) {
     const adr = document.createElement("span");
     adr.setAttribute("class", "adr");
     adr.textContent = `${price}€/jour`;
+
     article.appendChild(link);
     article.appendChild(userInfos);
     link.appendChild(img);

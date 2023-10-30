@@ -126,13 +126,14 @@ async function displayData(photographers) {
   });
 
   // Affichez la somme totale après la boucle
-  console.log("Somme totale : " + totalLikes);
+
   likesProfile.textContent = totalLikes;
 }
 
 async function init() {
   // Récupère les datas des photographes
   const photographers = await getPhotographers();
+
   displayData(photographers);
   initModal();
 }

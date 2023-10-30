@@ -4,25 +4,26 @@
  *@param {string} url image actuellement affiché
  */
 
-class Lightbox {
-  static init() {
-    const links = Array.from(document.querySelectorAll(".test1"));
+export class Lightbox {
+  // static init() {
+  //   const links = Array.from(document.querySelectorAll(".test1"));
 
-    const images = links.map((link) => link.getAttribute("href"));
+  //   const images = links.map((link) => link.getAttribute("href"));
 
-    links.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        new Lightbox(e.currentTarget.getAttribute("href"), images);
-      })
-    );
-    console.log(links);
-  }
+  //   links.forEach((link) =>
+  //     link.addEventListener("click", (e) => {
+  //       e.preventDefault();
+  //       new Lightbox(e.currentTarget.getAttribute("href"), images);
+  //     })
+  //   );
+  //   console.log(links);
+  // }
 
   /**
    *@param {string} url url de l'image
    *@param {string[]} images chemins des images de la lightbox
    */
+
   constructor(url, images) {
     this.element = this.builDOM(url);
     this.images = images;
@@ -67,6 +68,7 @@ class Lightbox {
    * Ferme la lightbox
    *@param {MouseEvent| KeyboardEvent} e
    */
+
   close(e) {
     e.preventDefault();
     this.element.classList.add("fadeOut");
@@ -140,4 +142,4 @@ class Lightbox {
         </div>
       </div>
 */
-Lightbox.init();
+// Lightbox.init();

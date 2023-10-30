@@ -1,3 +1,5 @@
+import { Lightbox } from "../utils/lightbox.js";
+
 export function photographerPage(data) {
   const { title, likes, video, image } = data;
 
@@ -46,6 +48,7 @@ export function photographerPage(data) {
     svgElement.setAttribute("class", "svg_heart");
 
     articlePhoto.appendChild(mediaTag);
+    articlePhoto.setAttribute("class", "articleTest");
 
     articlePhoto.appendChild(infoPicture);
     infoPicture.appendChild(titleImg);
@@ -56,6 +59,18 @@ export function photographerPage(data) {
       const newLikes = likes + 1;
       likesArticle.textContent = newLikes;
     });
+
+    const links = Array.from(document.querySelectorAll(".picture"));
+
+    const articles = links.map((link) => link.getAttribute("src"));
+
+    links.forEach((link) =>
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        new Lightbox(e.currentTarget.getAttribute("src"), articles);
+      })
+    );
+    console.log(articles);
     return articlePhoto;
   }
 
