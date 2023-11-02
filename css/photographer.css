@@ -263,6 +263,7 @@ form textarea {
 }
 
 .lightbox {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -362,4 +363,133 @@ form textarea {
   to {
     opacity: 0;
   }
+}
+
+/********************** myLightbox **********************/
+
+.myLightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+  overflow: auto;
+  animation: lightboxIn 0.5s;
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  display: none;
+}
+
+.myLightbox .fadeOut {
+  animation: lightboxOut 0.5s;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.myLightbox button {
+  opacity: 0.4;
+  text-indent: -3000px;
+  cursor: pointer;
+  transition: opacity 0.3s all ease-in-out;
+}
+
+.myLightbox button:hover {
+  opacity: 1;
+}
+
+.myLightbox_prev,
+.myLightbox_next {
+  border: none;
+  background: url(/assets/icons/arrow.svg) center center / 30px 48px no-repeat;
+  width: 50px;
+  height: 100%;
+  left: 50px;
+  position: fixed;
+  z-index: 11;
+  top: 0;
+  margin-top: -24px;
+}
+
+.myLightbox_next {
+  left: auto;
+  right: 50px;
+  transform: rotate(180deg);
+}
+
+.myLightbox_close {
+  border: none;
+  width: 42px;
+  height: 42px;
+  background: url(/assets/icons/closeModal.svg) center center / 42px 42px
+    no-repeat transparent;
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  z-index: 12;
+}
+
+.myLightbox_container img {
+  max-width: 100%;
+  max-height: 90vh;
+  animation: lightboxIn 0.5s;
+  transition: all 0.3s ease-in-out;
+}
+
+.myLightbox_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 60px;
+  min-height: 100%;
+}
+
+.myLightbox_loader {
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+  background: url(/assets/icons/loader.svg) center center no-repeat;
+}
+
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.myModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.myModal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
 }

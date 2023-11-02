@@ -1,5 +1,3 @@
-import { Lightbox } from "../utils/lightbox.js";
-
 export function photographerPage(data) {
   const { title, likes, video, image } = data;
 
@@ -60,17 +58,6 @@ export function photographerPage(data) {
       likesArticle.textContent = newLikes;
     });
 
-    const links = Array.from(document.querySelectorAll(".picture"));
-
-    const articles = links.map((link) => link.getAttribute("src"));
-
-    links.forEach((link) =>
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        new Lightbox(e.currentTarget.getAttribute("src"), articles);
-      })
-    );
-    console.log(articles);
     return articlePhoto;
   }
 
