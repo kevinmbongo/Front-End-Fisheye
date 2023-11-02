@@ -1,16 +1,34 @@
-const closeModalBtn = document.getElementById("closeMyLightboxBtn");
 const myLightbox = document.getElementById("myLightbox");
+const closeModalBtn = document.getElementById("closeMyLightboxBtn");
 
 // Gérer l'ouverture de la MyLightbox
-function showMyLightbox(currentSrc, myLightboxImg) {
+function showMyLightbox(currentSrc) {
   myLightbox.style.display = "block";
-  myLightboxImg.setAttribute("src", currentSrc);
+  const fileExtension = currentSrc.split(".").pop();
+  const myLightboxMedia = document.getElementById("myLightboxMedia");
+
+  // Supprimer le contenu précédent
+  myLightboxMedia.innerHTML = "";
+
+  if (fileExtension === "jpg") {
+    const imgElement = document.createElement("img");
+    imgElement.src = currentSrc;
+    imgElement.setAttribute("id", "myLightboxImg");
+    myLightboxMedia.appendChild(imgElement);
+  } else if (fileExtension === "mp4") {
+    const videoElement = document.createElement("video");
+    videoElement.src = currentSrc;
+    videoElement.setAttribute("controls", "true");
+    videoElement.setAttribute("id", "myLightboxVideo");
+    myLightboxMedia.appendChild(videoElement);
+  }
 }
 
 // Gérer la fermeture de la MyLightbox
 function hideMyLightbox() {
   myLightbox.style.display = "none";
 }
+
 closeModalBtn.addEventListener("click", hideMyLightbox);
 
 // Fermer la MyLightbox si l'utilisateur clique en dehors de la MyLightbox
@@ -24,7 +42,7 @@ window.addEventListener("click", function (event) {
 export function setupMyLightbox() {
   // Récupérer les éléments HTML
   const openMyLightboxBtn = document.querySelectorAll(".picture");
-  const myLightboxImg = document.getElementById("myLightboxImg");
+  const myLightboxMedia = document.getElementById("myLightboxMedia");
   const nextArrow = document.querySelector(".lightbox_next");
   const prevArrow = document.querySelector(".lightbox_prev");
 
@@ -34,39 +52,32 @@ export function setupMyLightbox() {
   openMyLightboxBtn.forEach((btn) => {
     btn.addEventListener("click", function (event) {
       const currentSrc = event.target.getAttribute("src");
-      showMyLightbox(currentSrc, myLightboxImg);
+      showMyLightbox(currentSrc);
     });
   });
 
   // Gérer les images suivantes
   nextArrow.addEventListener("click", function (event) {
-    const currentSrcMyLightbox = myLightboxImg.getAttribute("src");
+    const currentSrcMyLightbox = document
+      .getElementById("myLightboxMedia")
+      .querySelector("img, video")
+      .getAttribute("src");
     let i = src.findIndex((dataSrc) => dataSrc === currentSrcMyLightbox);
     if (i === src.length - 1) {
       i = -1;
     }
-    showMyLightbox(src[i + 1], myLightboxImg);
+    showMyLightbox(src[i + 1]);
   });
 
   prevArrow.addEventListener("click", function (event) {
-    const currentSrcMyLightbox = myLightboxImg.getAttribute("src");
+    const currentSrcMyLightbox = document
+      .getElementById("myLightboxMedia")
+      .querySelector("img, video")
+      .getAttribute("src");
     let i = src.findIndex((dataSrc) => dataSrc === currentSrcMyLightbox);
     if (i === 0) {
       i = src.length;
     }
-    showMyLightbox(src[i - 1], myLightboxImg);
+    showMyLightbox(src[i - 1]);
   });
 }
-
-// /**
-//    *@param {KeyboardEvent} e
-//    */
-//   onKeyUp(e) {
-//     if (e.key === "Escape") {
-//       this.close(e);
-//     } else if (e.key === "ArrowLeft") {
-//       this.prev(e);
-//     } else if (e.key === "ArrowRight") {
-//       this.next(e);
-//     }
-//   }

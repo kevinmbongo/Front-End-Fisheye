@@ -11,7 +11,7 @@
 }
 
 .container {
-  margin: 0 100px;
+  margin: 0 100px 150px 100px;
   position: relative;
 }
 
@@ -325,8 +325,9 @@ form textarea {
   z-index: 12;
 }
 
-.lightbox_container img {
-  max-width: 100%;
+.lightbox_container img,
+video {
+  max-width: 100vh;
   max-height: 90vh;
   animation: lightboxIn 0.5s;
   transition: all 0.3s ease-in-out;
