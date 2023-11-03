@@ -4,6 +4,7 @@ import { photographerPage } from "../templates/photographPage.js";
 
 import { initModal } from "../utils/contactForm.js";
 import { setupMyLightbox } from "../utils/myLightbox.js";
+import { mediaDisplays } from "../utils/sorting.js";
 
 function svgBlackHeart() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 18" fill="none">
@@ -34,17 +35,17 @@ function getCurrentPhotographerById(photographers, currentId) {
   return filteredPhotographers;
 }
 
+console.log();
+
 async function displayData(photographers) {
   let paramsString = window.location.search;
   let searchParams = new URLSearchParams(paramsString);
 
   let idPage = searchParams.get("id");
-
   const currentPhotographer = getCurrentPhotographerById(
     photographers,
     parseInt(idPage)
   );
-  console.log(currentPhotographer);
 
   const { name, portrait, city, country, tagline, price } =
     currentPhotographer[0];
@@ -81,6 +82,7 @@ async function displayData(photographers) {
 
   const adr = document.createElement("span");
   adr.textContent = `${price}€ / jour`;
+  const selectValue = document.getElementById("customSelect").value;
 
   infoProfile.appendChild(photographerName);
   infoProfile.appendChild(photographerLocation);
@@ -93,37 +95,47 @@ async function displayData(photographers) {
 
   let totalLikes = 0;
 
-  mediaFound.forEach((photographer) => {
-    const photographerPageModel = photographerPage(photographer);
-    const userCardDOM = photographerPageModel.getPageDOM();
+  function processPhotographerDisplay(mediaDisplays) {
+    mediaDisplays.forEach((photographer) => {
+      const photographerPageModel = photographerPage(photographer);
+      const userCardDOM = photographerPageModel.getPageDOM();
+      const span = userCardDOM.querySelector(".likes_value");
+      const svgHeart = userCardDOM.querySelector(".svg_heart");
 
-    const span = userCardDOM.querySelector(".likes_value");
-    const svgHeart = userCardDOM.querySelector(".svg_heart");
-
-    const content = span.textContent;
-    const contentNumber = parseFloat(content);
-    // incrémentation du total des likes
-    if (span) {
-      if (!isNaN(contentNumber)) {
-        totalLikes += contentNumber;
+      const content = span.textContent;
+      const contentNumber = parseFloat(content);
+      // incrémentation du total des likes
+      if (span) {
+        if (!isNaN(contentNumber)) {
+          totalLikes += contentNumber;
+        }
       }
-    }
 
-    let clicked = false;
-    // function qui gere le click sur le coeur
-    const clickHandler = () => {
-      if (clicked) {
-        return;
-      }
-      totalLikes += 1;
-      console.log("click totale : " + totalLikes);
-      likesProfile.textContent = totalLikes;
-      clicked = true;
-    };
-    // mise à jour du total des likes au click
-    svgHeart.addEventListener("click", clickHandler);
+      let clicked = false;
+      // function qui gere le click sur le coeur
+      const clickHandler = () => {
+        if (clicked) {
+          return;
+        }
+        totalLikes += 1;
+        likesProfile.textContent = totalLikes;
+        clicked = true;
+      };
+      // mise à jour du total des likes au click
+      svgHeart.addEventListener("click", clickHandler);
 
-    photographMain.appendChild(userCardDOM);
+      photographMain.appendChild(userCardDOM);
+    });
+  }
+
+  mediaDisplays(selectValue, processPhotographerDisplay, mediaFound);
+
+  // Ajoute un gestionnaire d'événement au document pour détecter les clics
+  document.addEventListener("change", function () {
+    let selectValue = document.getElementById("customSelect").value;
+
+    photographMain.innerHTML = "";
+    mediaDisplays(selectValue, processPhotographerDisplay, mediaFound);
   });
 
   // Affichez la somme totale après la boucle
@@ -134,7 +146,6 @@ async function displayData(photographers) {
 async function init() {
   // Récupère les datas des photographes
   const photographers = await getPhotographers();
-
   displayData(photographers);
   initModal();
   setupMyLightbox();
