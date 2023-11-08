@@ -28,14 +28,10 @@
         <div id="photo_profile"></div>
       </div>
 
+      <!-- ********************* Sort ********************** -->
+
       <div class="sort">
         <span>Trier par</span>
-
-        <select id="customSelect" class="customSelect">
-          <option value="popular">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
       </div>
 
       <div class="photograph_article"></div>
@@ -66,25 +62,25 @@
         <form id="form">
           <div class="input_container">
             <div id="firstName_container">
-              <label for="prenom">Prénom</label>
-              <input id="firstName" type="text" name="prenom" />
+              <label for="firstName">Prénom</label>
+              <input id="firstName" type="text" name="firstName" />
             </div>
 
             <div>
               <label for="lastName">Nom</label>
-              <input id="lastName" type="text" name="nom" />
+              <input id="lastName" type="text" name="lastName" />
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" type="email" name="email" />
+              <input id="email" type="email" name="email" autocomplete="on" />
             </div>
             <div>
-              <label for="message">Votre message</label>
+              <label for="message_area">Votre message</label>
               <textarea id="message_area" name="message"></textarea>
             </div>
           </div>
 
-          <button class="contact_button">Envoyer</button>
+          <button class="submit_button">Envoyer</button>
         </form>
       </div>
     </div>

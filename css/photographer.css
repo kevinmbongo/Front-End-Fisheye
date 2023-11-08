@@ -55,7 +55,10 @@
   margin: 30px 0 60px 0;
   font-size: 18px;
   font-weight: 700;
+  display: flex;
+  gap: 20px;
 }
+
 .customSelect {
   font-size: 20px;
   font-weight: bold;
@@ -69,6 +72,51 @@
   background-color: #901c1c;
   cursor: pointer;
   outline: none;
+}
+
+.sortBtn {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  background-color: #901c1c;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Styles des options */
+.optionContainer {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  display: none;
+  flex-direction: column;
+  width: 170px;
+  background-color: #901c1c;
+  color: #333;
+  font-size: 14px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.optionContainer hr {
+  width: 90%;
+  margin: auto;
+  padding: 0;
+}
+
+.optionContainer svg {
+  transform: rotate(180deg);
 }
 
 .photograph_article {
@@ -124,7 +172,10 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.contact_button:hover {
+  background-color: #db8876;
+  color: black;
+}
 .snackbar {
   position: fixed;
   bottom: 0;
@@ -248,7 +299,18 @@ form textarea {
   font-size: 16px;
   margin: 0;
 }
-
+.submit_button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
 /********************** Lightbox **********************/
 .grid {
   padding: 16px;

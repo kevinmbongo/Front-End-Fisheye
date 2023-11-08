@@ -82,7 +82,11 @@ async function displayData(photographers) {
 
   const adr = document.createElement("span");
   adr.textContent = `${price}€ / jour`;
-  const selectValue = document.getElementById("customSelect").value;
+  const selectValue = document.getElementById("currentSort");
+  const selectText = document.getElementById("currentText");
+  const alphabetSort = document.getElementById("alphabetSort");
+  const dateSort = document.getElementById("dateSort");
+  const popularSort = document.getElementById("popularSort");
 
   infoProfile.appendChild(photographerName);
   infoProfile.appendChild(photographerLocation);
@@ -95,8 +99,8 @@ async function displayData(photographers) {
 
   let totalLikes = 0;
 
-  function processPhotographerDisplay(mediaDisplays) {
-    mediaDisplays.forEach((photographer) => {
+  function processPhotographerDisplay(mediaDisplayArray) {
+    mediaDisplayArray.forEach((photographer) => {
       const photographerPageModel = photographerPage(photographer);
       const userCardDOM = photographerPageModel.getPageDOM();
       const span = userCardDOM.querySelector(".likes_value");
@@ -127,20 +131,35 @@ async function displayData(photographers) {
       photographMain.appendChild(userCardDOM);
     });
   }
-
-  mediaDisplays(selectValue, processPhotographerDisplay, mediaFound);
-
-  // Ajoute un gestionnaire d'événement au document pour détecter les clics
-  document.addEventListener("change", function () {
-    let selectValue = document.getElementById("customSelect").value;
-
-    photographMain.innerHTML = "";
-    mediaDisplays(selectValue, processPhotographerDisplay, mediaFound);
-  });
-
   // Affichez la somme totale après la boucle
 
   likesProfile.textContent = totalLikes;
+
+  mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+
+  // Écouteurs d'événements pour les boutons de tri
+  // Lorsque l'utilisateur clique sur le bouton "Alphabet", "Popularité" ou "Date", cette fonction est exécutée.
+
+  alphabetSort.addEventListener("click", function () {
+    selectText.innerText = alphabetSort.innerText;
+    selectValue.value = alphabetSort.value;
+    photographMain.innerHTML = "";
+    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+  });
+
+  popularSort.addEventListener("click", function () {
+    selectText.innerText = popularSort.innerText;
+    selectValue.value = popularSort.value;
+    photographMain.innerHTML = "";
+    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+  });
+
+  dateSort.addEventListener("click", function () {
+    selectText.innerText = dateSort.innerText;
+    selectValue.value = dateSort.value;
+    photographMain.innerHTML = "";
+    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+  });
 }
 
 async function init() {
