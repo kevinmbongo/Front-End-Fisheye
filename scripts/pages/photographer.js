@@ -131,9 +131,6 @@ async function displayData(photographers) {
       photographMain.appendChild(userCardDOM);
     });
   }
-  // Affichez la somme totale après la boucle
-
-  likesProfile.textContent = totalLikes;
 
   mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
 
@@ -160,6 +157,10 @@ async function displayData(photographers) {
     photographMain.innerHTML = "";
     mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
   });
+
+  // Affichez la somme totale après la boucle
+
+  likesProfile.textContent = totalLikes;
 }
 
 async function init() {
