@@ -65,9 +65,6 @@ async function displayData(photographers) {
     `assets/images/portraits/${portrait}`
   );
   photographerPortrait.setAttribute("alt", name);
-  const sort = document.querySelector(".sort");
-  const sortList = document.createElement("div");
-  sortList.setAttribute("class", "sort_list");
   const mediaFound = getMediaByPhotographerId(
     photographers.media,
     parseInt(idPage)
@@ -137,25 +134,65 @@ async function displayData(photographers) {
   // Écouteurs d'événements pour les boutons de tri
   // Lorsque l'utilisateur clique sur le bouton "Alphabet", "Popularité" ou "Date", cette fonction est exécutée.
 
+  const buttons = document.querySelectorAll(".sortBtn");
+
+  buttons.forEach((button) => {
+    button.addEventListener("focus", () => {
+      button.classList.add("focused");
+    });
+
+    button.addEventListener("blur", () => {
+      button.classList.remove("focused");
+    });
+  });
+
+  let isOpen = false;
+
+  const optionContainer = document.querySelector(
+    '[aria-labelledby="filter-label"]'
+  );
+
+  function openOptionContainer() {
+    optionContainer.style.display = "flex";
+    isOpen = true;
+  }
+
+  function closeOptionContainer() {
+    optionContainer.style.display = "none";
+    isOpen = false;
+  }
+  currentSort.addEventListener("click", function () {
+    openOptionContainer();
+  });
+
   alphabetSort.addEventListener("click", function () {
     selectText.innerText = alphabetSort.innerText;
     selectValue.value = alphabetSort.value;
-    photographMain.innerHTML = "";
-    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    setTimeout(() => {
+      closeOptionContainer();
+      photographMain.innerHTML = "";
+      mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    }, 1500);
   });
 
   popularSort.addEventListener("click", function () {
     selectText.innerText = popularSort.innerText;
     selectValue.value = popularSort.value;
-    photographMain.innerHTML = "";
-    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    setTimeout(() => {
+      closeOptionContainer();
+      photographMain.innerHTML = "";
+      mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    }, 1500);
   });
 
   dateSort.addEventListener("click", function () {
     selectText.innerText = dateSort.innerText;
     selectValue.value = dateSort.value;
-    photographMain.innerHTML = "";
-    mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    setTimeout(() => {
+      closeOptionContainer();
+      photographMain.innerHTML = "";
+      mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
+    }, 1500);
   });
 
   // Affichez la somme totale après la boucle

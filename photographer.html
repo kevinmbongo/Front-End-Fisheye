@@ -8,33 +8,108 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Fisheye - photographe</title>
   </head>
 
   <body>
     <header>
       <a href="./index.html">
-        <img src="assets/images/logo.png" class="logo" />
+        <img
+          src="assets/images/logo.png"
+          alt="Fisheye Home page"
+          class="logo"
+        />
       </a>
     </header>
 
     <main id="main_photographer_page" class="container">
-      <div class="photograph_header" id="main_header">
+      <section class="photograph_header" id="main_header">
         <div class="info_profile"></div>
 
-        <button class="contact_button" id="open_modal">Contactez-moi</button>
+        <button
+          class="contact_button"
+          aria-haspopup="true"
+          aria-label="Contact Me"
+          id="open_modal"
+        >
+          Contactez-moi
+        </button>
 
         <div id="photo_profile"></div>
-      </div>
+      </section>
 
       <!-- ********************* Sort ********************** -->
 
-      <div class="sort">
-        <span>Trier par</span>
-      </div>
+      <section class="sort">
+        <i id="Order by">Trier par</i>
+        <div id="sortContainer" class="sortContainer">
+          <button
+            class="sortBtn"
+            id="currentSort"
+            value="popular"
+            aria-expanded="false"
+            aria-controls="optionContainer"
+            aria-labelledby="Order by"
+            tabindex="0"
+          >
+            <span id="currentText">Popularité</span>
+            <span id="openList">
+              <i class="fa-solid fa-chevron-up"></i>
+            </span>
+          </button>
 
-      <div class="photograph_article"></div>
+          <div
+            class="optionContainer"
+            role="listbox"
+            aria-activedescendant="currentSort"
+            aria-selected="true"
+            aria-labelledby="filter-label"
+          >
+            <button
+              id="popularSort"
+              class="sortBtn"
+              value="popular"
+              role="option"
+              aria-selected="true"
+              tabindex="0"
+            >
+              Popularité
+              <span id="closeList">
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </button>
+            <hr />
+            <button
+              id="dateSort"
+              class="sortBtn"
+              value="date"
+              role="option"
+              tabindex="0"
+            >
+              Date
+            </button>
+            <hr />
+            <button
+              id="alphabetSort"
+              class="sortBtn"
+              value="title"
+              role="option"
+              tabindex="0"
+            >
+              Titre
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="photograph_article"></section>
 
       <div class="snackbar"></div>
 

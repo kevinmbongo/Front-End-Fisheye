@@ -7,7 +7,7 @@
   position: fixed;
   inset: 0;
   width: 100vw;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .container {
@@ -59,6 +59,14 @@
   gap: 20px;
 }
 
+.sort i {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.sortContainer {
+  position: relative;
+}
 .customSelect {
   font-size: 20px;
   font-weight: bold;
@@ -85,12 +93,22 @@
   color: white;
   padding: 20px;
   width: 170px;
-  height: 70px;
+  height: 60px;
   border: none;
   border-radius: 5px;
   background-color: #901c1c;
   cursor: pointer;
   outline: none;
+}
+
+.sortBtn:hover {
+  background-color: #db8876;
+  color: black;
+}
+
+.sortBtn.focused {
+  background-color: #db8876;
+  color: black;
 }
 
 /* Styles des options */
@@ -105,7 +123,7 @@
   background-color: #901c1c;
   color: #333;
   font-size: 14px;
-  border-radius: 3px;
+  border-radius: 5px;
   text-align: center;
 }
 
@@ -121,8 +139,8 @@
 
 .photograph_article {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fit, 350px);
+  gap: 30px;
 }
 
 .photograph_article article {
@@ -166,7 +184,7 @@
   color: white;
   padding: 11px;
   width: 170px;
-  height: 70px;
+  height: 60px;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
@@ -305,12 +323,20 @@ form textarea {
   color: white;
   padding: 11px;
   width: 170px;
-  height: 70px;
+  height: 60px;
   border: none;
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
 }
+.submit_button:hover {
+  color: black;
+  border: 1px solid blue;
+}
+.submit_button.focused {
+  color: black;
+}
+
 /********************** Lightbox **********************/
 .grid {
   padding: 16px;
@@ -331,7 +357,7 @@ form textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 10;
   overflow: auto;
   animation: lightboxIn 0.5s;
@@ -362,7 +388,7 @@ form textarea {
   background: url(/assets/icons/arrow.svg) center center / 30px 48px no-repeat;
   width: 50px;
   height: 100%;
-  left: 50px;
+  left: 30px;
   position: fixed;
   z-index: 11;
   top: 0;
@@ -371,25 +397,25 @@ form textarea {
 
 .lightbox_next {
   left: auto;
-  right: 50px;
+  right: 30px;
   transform: rotate(180deg);
 }
 
 .lightbox_close {
   border: none;
-  width: 42px;
-  height: 42px;
-  background: url(/assets/icons/closeModal.svg) center center / 42px 42px
+  width: 50px;
+  height: 50px;
+  background: url(/assets/icons/closeModal.svg) center center / 50px 50px
     no-repeat transparent;
   position: fixed;
-  top: 50px;
-  right: 10px;
+  top: 5vh;
+  right: 4vh;
   z-index: 12;
 }
 
 .lightbox_container img,
 video {
-  max-width: 100vh;
+  max-width: 80vw;
   max-height: 90vh;
   animation: lightboxIn 0.5s;
   transition: all 0.3s ease-in-out;
@@ -426,133 +452,4 @@ video {
   to {
     opacity: 0;
   }
-}
-
-/********************** myLightbox **********************/
-
-.myLightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10;
-  overflow: auto;
-  animation: lightboxIn 0.5s;
-  transition: all 0.3s ease-in-out;
-  opacity: 1;
-  display: none;
-}
-
-.myLightbox .fadeOut {
-  animation: lightboxOut 0.5s;
-  transition: all 0.3s ease-in-out;
-  opacity: 0;
-}
-
-.myLightbox button {
-  opacity: 0.4;
-  text-indent: -3000px;
-  cursor: pointer;
-  transition: opacity 0.3s all ease-in-out;
-}
-
-.myLightbox button:hover {
-  opacity: 1;
-}
-
-.myLightbox_prev,
-.myLightbox_next {
-  border: none;
-  background: url(/assets/icons/arrow.svg) center center / 30px 48px no-repeat;
-  width: 50px;
-  height: 100%;
-  left: 50px;
-  position: fixed;
-  z-index: 11;
-  top: 0;
-  margin-top: -24px;
-}
-
-.myLightbox_next {
-  left: auto;
-  right: 50px;
-  transform: rotate(180deg);
-}
-
-.myLightbox_close {
-  border: none;
-  width: 42px;
-  height: 42px;
-  background: url(/assets/icons/closeModal.svg) center center / 42px 42px
-    no-repeat transparent;
-  position: fixed;
-  top: 50px;
-  right: 10px;
-  z-index: 12;
-}
-
-.myLightbox_container img {
-  max-width: 100%;
-  max-height: 90vh;
-  animation: lightboxIn 0.5s;
-  transition: all 0.3s ease-in-out;
-}
-
-.myLightbox_container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 60px;
-  min-height: 100%;
-}
-
-.myLightbox_loader {
-  width: 50px;
-  height: 50px;
-  opacity: 0.5;
-  background: url(/assets/icons/loader.svg) center center no-repeat;
-}
-
-@keyframes lightboxIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes lightboxOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-.myModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.myModal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  text-align: center;
-}
-
-.close {
-  float: right;
-  cursor: pointer;
 }
