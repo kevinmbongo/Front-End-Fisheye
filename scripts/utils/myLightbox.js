@@ -5,6 +5,7 @@ const closeModalBtn = document.getElementById("closeMyLightboxBtn");
 function showMyLightbox(currentSrc) {
   myLightbox.style.display = "block";
   const fileExtension = currentSrc.split(".").pop();
+
   const myLightboxMedia = document.getElementById("myLightboxMedia");
 
   // Supprimer le contenu précédent
@@ -42,7 +43,6 @@ window.addEventListener("click", function (event) {
 export function setupMyLightbox() {
   // Récupérer les éléments HTML
   const openMyLightboxBtn = document.querySelectorAll(".picture");
-  const myLightboxMedia = document.getElementById("myLightboxMedia");
   const nextArrow = document.querySelector(".lightbox_next");
   const prevArrow = document.querySelector(".lightbox_prev");
 
@@ -52,6 +52,7 @@ export function setupMyLightbox() {
   openMyLightboxBtn.forEach((btn) => {
     btn.addEventListener("click", function (event) {
       const currentSrc = event.target.getAttribute("src");
+
       showMyLightbox(currentSrc);
     });
   });
@@ -62,6 +63,7 @@ export function setupMyLightbox() {
       .getElementById("myLightboxMedia")
       .querySelector("img, video")
       .getAttribute("src");
+
     let i = src.findIndex((dataSrc) => dataSrc === currentSrcMyLightbox);
     if (i === src.length - 1) {
       i = -1;

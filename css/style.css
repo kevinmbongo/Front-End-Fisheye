@@ -27,10 +27,6 @@ h1 {
   margin-left: 100px;
 }
 
-.focused :focus {
-  border: 2px solid #95fff9;
-}
-
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

@@ -100,6 +100,15 @@ async function displayDataModule(photographers) {
   const lastName = document.getElementById("lastName");
   const email = document.getElementById("email");
   const message = document.getElementById("message_area");
+  const submitbtn = document.querySelector(".submit_button");
+
+  submitbtn.addEventListener("focus", () => {
+    submitbtn.classList.add("focused");
+  });
+
+  submitbtn.addEventListener("blur", () => {
+    submitbtn.classList.remove("focused");
+  });
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();

@@ -84,6 +84,7 @@ async function displayData(photographers) {
   const alphabetSort = document.getElementById("alphabetSort");
   const dateSort = document.getElementById("dateSort");
   const popularSort = document.getElementById("popularSort");
+  const buttons = document.querySelectorAll(".button");
 
   infoProfile.appendChild(photographerName);
   infoProfile.appendChild(photographerLocation);
@@ -134,8 +135,6 @@ async function displayData(photographers) {
   // Écouteurs d'événements pour les boutons de tri
   // Lorsque l'utilisateur clique sur le bouton "Alphabet", "Popularité" ou "Date", cette fonction est exécutée.
 
-  const buttons = document.querySelectorAll(".sortBtn");
-
   buttons.forEach((button) => {
     button.addEventListener("focus", () => {
       button.classList.add("focused");
@@ -172,7 +171,7 @@ async function displayData(photographers) {
       closeOptionContainer();
       photographMain.innerHTML = "";
       mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
-    }, 1500);
+    }, 1000);
   });
 
   popularSort.addEventListener("click", function () {
@@ -182,7 +181,7 @@ async function displayData(photographers) {
       closeOptionContainer();
       photographMain.innerHTML = "";
       mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
-    }, 1500);
+    }, 1000);
   });
 
   dateSort.addEventListener("click", function () {
@@ -192,7 +191,7 @@ async function displayData(photographers) {
       closeOptionContainer();
       photographMain.innerHTML = "";
       mediaDisplays(selectValue.value, processPhotographerDisplay, mediaFound);
-    }, 1500);
+    }, 1000);
   });
 
   // Affichez la somme totale après la boucle

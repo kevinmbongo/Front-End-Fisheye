@@ -9,6 +9,22 @@
   width: 100vw;
   background: rgba(255, 255, 255, 0.9);
 }
+.button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 60px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.focused {
+  background-color: #db8876;
+  color: black;
+}
 
 .container {
   margin: 0 100px 150px 100px;
@@ -67,37 +83,13 @@
 .sortContainer {
   position: relative;
 }
-.customSelect {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  padding: 11px;
-  width: 170px;
-  height: 70px;
-  border: none;
-  border-radius: 5px;
-  background-color: #901c1c;
-  cursor: pointer;
-  outline: none;
-}
 
 .sortBtn {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
   padding: 20px;
-  width: 170px;
-  height: 60px;
-  border: none;
-  border-radius: 5px;
-  background-color: #901c1c;
-  cursor: pointer;
   outline: none;
 }
 
@@ -106,15 +98,10 @@
   color: black;
 }
 
-.sortBtn.focused {
-  background-color: #db8876;
-  color: black;
-}
-
 /* Styles des options */
 .optionContainer {
   position: absolute;
-  z-index: 10;
+  z-index: 5;
   left: 0;
   top: 0;
   display: none;
@@ -178,22 +165,11 @@
   opacity: 0.8;
 }
 
-.contact_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  padding: 11px;
-  width: 170px;
-  height: 60px;
-  border: none;
-  background-color: #901c1c;
-  border-radius: 5px;
-  cursor: pointer;
-}
 .contact_button:hover {
   background-color: #db8876;
   color: black;
 }
+
 .snackbar {
   position: fixed;
   bottom: 0;
@@ -317,24 +293,13 @@ form textarea {
   font-size: 16px;
   margin: 0;
 }
-.submit_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  padding: 11px;
-  width: 170px;
-  height: 60px;
-  border: none;
-  background-color: #901c1c;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 .submit_button:hover {
   color: black;
-  border: 1px solid blue;
 }
 .submit_button.focused {
   color: black;
+  background-color: #901c1c;
 }
 
 /********************** Lightbox **********************/
@@ -412,11 +377,18 @@ form textarea {
   right: 4vh;
   z-index: 12;
 }
+.lightbox_title {
+  position: fixed;
+  bottom: 2vh;
+  left: 20vw;
+  z-index: 12;
+  font-size: 1.5rem;
+}
 
 .lightbox_container img,
 video {
   max-width: 80vw;
-  max-height: 90vh;
+  max-height: 85vh;
   animation: lightboxIn 0.5s;
   transition: all 0.3s ease-in-out;
 }
@@ -427,13 +399,6 @@ video {
   justify-content: center;
   margin: 0 60px;
   min-height: 100%;
-}
-
-.lightbox_loader {
-  width: 50px;
-  height: 50px;
-  opacity: 0.5;
-  background: url(/assets/icons/loader.svg) center center no-repeat;
 }
 
 @keyframes lightboxIn {

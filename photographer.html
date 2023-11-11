@@ -34,7 +34,7 @@
         <div class="info_profile"></div>
 
         <button
-          class="contact_button"
+          class="button contact_button"
           aria-haspopup="true"
           aria-label="Contact Me"
           id="open_modal"
@@ -51,7 +51,7 @@
         <i id="Order by">Trier par</i>
         <div id="sortContainer" class="sortContainer">
           <button
-            class="sortBtn"
+            class="button sortBtn"
             id="currentSort"
             value="popular"
             aria-expanded="false"
@@ -74,21 +74,21 @@
           >
             <button
               id="popularSort"
-              class="sortBtn"
+              class="button sortBtn"
               value="popular"
               role="option"
               aria-selected="true"
               tabindex="0"
             >
               Popularité
-              <span id="closeList">
+              <span>
                 <i class="fa-solid fa-chevron-down"></i>
               </span>
             </button>
             <hr />
             <button
               id="dateSort"
-              class="sortBtn"
+              class="button sortBtn"
               value="date"
               role="option"
               tabindex="0"
@@ -98,7 +98,7 @@
             <hr />
             <button
               id="alphabetSort"
-              class="sortBtn"
+              class="button sortBtn"
               value="title"
               role="option"
               tabindex="0"
@@ -119,6 +119,8 @@
         <button class="lightbox_close" id="closeMyLightboxBtn">Fermer</button>
         <button class="lightbox_next">Suivant</button>
         <button class="lightbox_prev">Précédent</button>
+        <span class="lightbox_title"></span>
+
         <div class="lightbox_container" id="myLightboxMedia"></div>
       </div>
     </main>
@@ -132,7 +134,9 @@
             <h2>Contactez-moi</h2>
             <h2 id="name_photographer"></h2>
           </div>
-          <img src="assets/icons/close.svg" id="close_modal" />
+          <div id="close_modal">
+            <img src="assets/icons/close.svg" />
+          </div>
         </header>
         <form id="form">
           <div class="input_container">
@@ -155,7 +159,7 @@
             </div>
           </div>
 
-          <button class="submit_button">Envoyer</button>
+          <button class="button submit_button">Envoyer</button>
         </form>
       </div>
     </div>
