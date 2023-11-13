@@ -31,15 +31,18 @@ export function photographerPage(data) {
 
     const likesArticle = document.createElement("span");
     likesArticle.setAttribute("class", "likes_value");
+    likesArticle.setAttribute("tabindex", 0);
     likesArticle.textContent = likes;
 
     const mediaTag = isVideo
       ? document.createElement("video")
       : document.createElement("img");
 
-    mediaTag.setAttribute("alt", title);
+    mediaTag.setAttribute("alt", `${title}, closeup view`);
+    mediaTag.setAttribute("aria-label", title);
     mediaTag.setAttribute("class", "picture");
     mediaTag.setAttribute("src", cardMediaSrc);
+    mediaTag.setAttribute("tabindex", 0);
 
     const svgElement = document.createElement("div");
     svgElement.innerHTML = svgHeart();

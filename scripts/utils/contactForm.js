@@ -7,12 +7,13 @@ function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 
-  // close when click anywhere outside of the modal
-  window.onclick = function (event) {
-    if (event.target === modal) {
+  // Ajout de la gestion de la touche "Escape" pour fermer la modal
+  window.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && modal.style.display === "block") {
+      console.log("close");
       closeModal();
     }
-  };
+  });
 }
 
 async function getModulePhotographers() {

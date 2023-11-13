@@ -35,8 +35,6 @@ function getCurrentPhotographerById(photographers, currentId) {
   return filteredPhotographers;
 }
 
-console.log();
-
 async function displayData(photographers) {
   let paramsString = window.location.search;
   let searchParams = new URLSearchParams(paramsString);
@@ -146,7 +144,7 @@ async function displayData(photographers) {
   });
 
   let isOpen = false;
-
+  console.log(isOpen);
   const optionContainer = document.querySelector(
     '[aria-labelledby="filter-label"]'
   );
