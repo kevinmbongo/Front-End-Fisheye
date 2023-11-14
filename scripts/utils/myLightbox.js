@@ -14,7 +14,10 @@ function showMyLightbox(currentSrc, currentTitle) {
   if (fileExtension === "jpg") {
     const imgElement = document.createElement("img");
     imgElement.src = currentSrc;
-    imgElement.setAttribute("alt", currentTitle);
+
+    // J'ai besoin de d'afficher uniquement le titre dans l'alt,et le .split pose problème uniquement sur cette ligne je ne sais pas pourquoi.
+
+    imgElement.setAttribute("alt", currentTitle.split(",")[0]);
     imgElement.setAttribute("id", "myLightboxImg");
     myLightboxMedia.appendChild(imgElement);
     console.log(currentSrc);
