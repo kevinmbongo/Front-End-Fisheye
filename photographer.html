@@ -2,200 +2,36 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <title>Fisheye - photographe</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <title>Fisheye - photographe </title>
   </head>
-
   <body>
     <header>
-      <a href="./index.html">
-        <img
-          src="assets/images/logo.png"
-          alt="Fisheye Home page"
-          class="logo"
-        />
-      </a>
+      <img src="assets/images/logo.png" class="logo" />
     </header>
-
-    <main id="main_photographer_page" class="container">
-      <section class="photograph_header" id="main_header">
-        <div class="info_profile"></div>
-
-        <button
-          class="button contact_button"
-          aria-haspopup="true"
-          aria-label="Contact Me"
-          id="open_modal"
-        >
-          Contactez-moi
-        </button>
-
-        <div id="photo_profile"></div>
-      </section>
-
-      <!-- ********************* Sort ********************** -->
-
-      <section class="sort">
-        <i id="Order by">Trier par</i>
-        <div id="sortContainer" class="sortContainer">
-          <button
-            class="button sortBtn"
-            id="currentSort"
-            value="popular"
-            aria-expanded="false"
-            aria-controls="optionContainer"
-            aria-labelledby="Order by"
-            tabindex="0"
-          >
-            <span id="currentText">Popularité</span>
-            <span id="openList">
-              <i class="fa-solid fa-chevron-up"></i>
-            </span>
-          </button>
-
-          <div
-            class="optionContainer"
-            role="listbox"
-            aria-activedescendant="currentSort"
-            aria-selected="true"
-            aria-labelledby="filter-label"
-          >
-            <button
-              id="popularSort"
-              class="button sortBtn"
-              value="popular"
-              role="option"
-              aria-selected="true"
-              tabindex="0"
-            >
-              Popularité
-              <span>
-                <i class="fa-solid fa-chevron-down"></i>
-              </span>
-            </button>
-            <hr />
-            <button
-              id="dateSort"
-              class="button sortBtn"
-              value="date"
-              role="option"
-              tabindex="0"
-            >
-              Date
-            </button>
-            <hr />
-            <button
-              id="alphabetSort"
-              class="button sortBtn"
-              value="title"
-              role="option"
-              tabindex="0"
-            >
-              Titre
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section class="photograph_article"></section>
-
-      <div class="snackbar"></div>
-
-      <!-- ********************* Lightbox ********************** -->
-
-      <div
-        class="lightbox"
-        id="myLightbox"
-        role="dialog"
-        aria-labelledby="lightboxTitle"
-        aria-modal="true"
-      >
-        <button
-          class="lightbox_close"
-          id="closeMyLightboxBtn"
-          aria-label="Close dialog"
-        ></button>
-        <button class="lightbox_next" aria-label="Next image"></button>
-        <button class="lightbox_prev" aria-label="Previous image"></button>
-        <span class="lightbox_title" id="lightboxTitle" role="heading"></span>
-
-        <div class="lightbox_container" id="myLightboxMedia"></div>
+    <main id="main">
+      <div class="photograph-header">
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
     </main>
-
-    <!-- ********************* Modal ********************** -->
-
-    <div id="contact_modal" aria-labelledby="name_photographer" class="blur">
-      <div class="modal">
-        <header>
-          <h1>
-            <span>Contactez-moi</span>
-            <br />
-            <span id="name_photographer"></span>
-          </h1>
-          <div id="close_modal" tabindex="0">
-            <img src="assets/icons/close.svg" alt="Close Contact form" />
-          </div>
+    <div id="contact_modal">
+			<div class="modal">
+				<header>
+          <h2>Contactez-moi</h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-        <form id="form">
-          <div class="input_container">
-            <div id="firstName_container">
-              <label for="firstName">Prénom</label>
-              <input
-                id="firstName"
-                type="text"
-                name="firstName"
-                aria-labelledby="firstName"
-              />
-            </div>
-
-            <div>
-              <label for="lastName">Nom</label>
-              <input
-                id="lastName"
-                type="text"
-                name="lastName"
-                aria-labelledby="lastName"
-              />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                aria-labelledby="email"
-                autocomplete="on"
-              />
-            </div>
-            <div>
-              <label for="message_area">Votre message</label>
-              <textarea
-                id="message_area"
-                name="message"
-                aria-labelledby="message_area"
-              ></textarea>
-            </div>
-          </div>
-
-          <button class="button submit_button" type="submit" aria-label="Send">
-            Envoyer
-          </button>
-        </form>
-      </div>
-    </div>
-    <script type="module" src="/scripts/pages/photographer.js"></script>
+				<form>
+					<div>
+						<label>Prénom</label>
+						<input />
+					</div>
+          <button class="contact_button">Envoyer</button>
+				</form>
+			</div>
+		</div>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
