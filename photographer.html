@@ -20,13 +20,30 @@
         />
       </a>
     </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+    <main id="main" class="container">
+      <section class="photograph_header" id="main_header">
+        <div class="info_profile"></div>
+
+        <button
+          class="button contact_button"
+          aria-haspopup="true"
+          aria-label="Contact Me"
+          id="open_modal"
+        >
           Contactez-moi
         </button>
-      </div>
+
+        <div id="photo_profile"></div>
+      </section>
+      <!-- ********************* Sort ********************** -->
+      <section class="sort">
+        <i id="Order by">Trier par</i>
+      </section>
+      <section class="photograph_article"></section>
+
+      <div class="snackbar"></div>
     </main>
+    <!-- ********************* Modal ********************** -->
     <div id="contact_modal">
       <div class="modal">
         <header>
@@ -42,7 +59,7 @@
         </form>
       </div>
     </div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script type="module" src="/scripts/pages/profilePage.js"></script>
+    <script type="module" src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>

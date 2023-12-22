@@ -1,11 +1,11 @@
-import { photographerTemplate } from "../templates/photographerCard.js";
+import { photographerCard } from "../templates/photographeCard.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
 
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
   photographers.forEach((photographer) => {
-    const photographerModel = photographerTemplate(photographer);
+    const photographerModel = photographerCard(photographer);
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });

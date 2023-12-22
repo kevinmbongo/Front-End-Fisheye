@@ -4,6 +4,7 @@ export async function getPhotographers() {
   const reponse = await fetch("./data/photographers.json");
   let photographers = await reponse.json();
   // et bien retourner le tableau photographers seulement une fois récupéré
+
   return {
     ...photographers,
   };
