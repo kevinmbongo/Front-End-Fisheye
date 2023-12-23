@@ -1,5 +1,7 @@
+import { mediasCard } from "../templates/mediasCard.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
 
+const articleSection = document.querySelector(".photograph_article");
 export function photographerProfile(data) {
   const { name, portrait, city, country, tagline, price } = data;
 
@@ -24,9 +26,9 @@ export function photographerProfile(data) {
   photoProfile.appendChild(photographerPortrait);
 }
 
-function getPhotographerData(photographerData, id) {
-  const filteredPhotographer = photographerData.filter(
-    (photographer) => photographer.photographerId === id
+function getPhotographerData(media, id) {
+  const filteredPhotographer = media.filter(
+    (photographer) => photographer.photographerId === parseInt(id)
   );
 
   return filteredPhotographer;
@@ -35,13 +37,24 @@ function getPhotographerData(photographerData, id) {
 async function init() {
   // Récupère les datas des photographes
   const { photographers } = await getPhotographers();
+  const { media } = await getPhotographers();
   const params = new URLSearchParams(window.location.search);
   const idPage = params.get("id");
   const currentPhotographer = photographers.filter((photographer) => {
     return photographer.id === parseInt(idPage);
   });
-
-  console.log("Current Photographer:", currentPhotographer[0]);
+  const currentMedias = getPhotographerData(media, idPage);
+  console.log("media:", media);
+  console.log("Current medias:", currentMedias);
   photographerProfile(currentPhotographer[0]);
+
+  if (currentMedias) {
+    currentMedias.forEach((item) => {
+      console.log(item);
+      articleSection.appendChild(mediasCard(item));
+    });
+  } else {
+    console.error("myArray is undefined or not an array");
+  }
 }
 init();

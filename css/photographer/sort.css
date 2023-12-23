@@ -1,0 +1,17 @@
+/********************** sort **********************/
+.sort {
+  margin: 30px 0 60px 0;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  gap: 20px;
+}
+
+.sort i {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.sortContainer {
+  position: relative;
+}

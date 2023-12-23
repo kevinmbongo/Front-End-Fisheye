@@ -1,4 +1,6 @@
-@import url("photographer.css");
+@import url("photographer/photographer.css");
+@import url("photographer/sort.css");
+@import url("photographer/modal.css");
 a {
   text-decoration: none;
   color: inherit;
