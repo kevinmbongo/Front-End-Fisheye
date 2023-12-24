@@ -20,6 +20,8 @@ export function mediasCard(data) {
     likesArticle.setAttribute("tabindex", 0);
     likesArticle.textContent = likes;
 
+    const snackbar = document.querySelector(".snackbar");
+
     const mediaTag = isVideo
       ? document.createElement("video")
       : document.createElement("img");
@@ -37,7 +39,6 @@ export function mediasCard(data) {
 
     articlePhoto.appendChild(mediaTag);
     articlePhoto.setAttribute("class", "articleTest");
-
     articlePhoto.appendChild(infoPicture);
     infoPicture.appendChild(titleImg);
     infoPicture.appendChild(likesContainer);

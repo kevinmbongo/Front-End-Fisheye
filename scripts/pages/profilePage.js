@@ -5,6 +5,15 @@ const articleSection = document.querySelector(".photograph_article");
 export function photographerProfile(data) {
   const { name, portrait, city, country, tagline, price } = data;
 
+  const likesContainer = document.createElement("div");
+  likesContainer.setAttribute("class", "profile_likes_container");
+  const adr = document.createElement("span");
+  adr.textContent = `${price}€ / jour`;
+
+  const snackbar = document.querySelector(".snackbar");
+  snackbar.appendChild(likesContainer);
+  snackbar.appendChild(adr);
+
   const infoProfile = document.querySelector(".info_profile");
   const photoProfile = document.querySelector("#photo_profile");
   const photographerName = document.createElement("h2");
