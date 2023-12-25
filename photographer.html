@@ -51,18 +51,62 @@
       <div class="snackbar"></div>
     </main>
     <!-- ********************* Modal ********************** -->
-    <div id="contact_modal">
+    <div id="contact_modal" aria-labelledby="name_photographer" class="blur">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
+          <h1>
+            <span>Contactez-moi</span>
+            <br />
+            <span id="name_photographer"></span>
+          </h1>
+          <div id="close_modal" tabindex="0">
+            <img src="assets/icons/close.svg" alt="Close Contact form" />
           </div>
-          <button class="contact_button">Envoyer</button>
+        </header>
+        <form id="form">
+          <div class="input_container">
+            <div id="firstName_container">
+              <label for="firstName">Prénom</label>
+              <input
+                id="firstName"
+                type="text"
+                name="firstName"
+                aria-labelledby="firstName"
+              />
+            </div>
+
+            <div>
+              <label for="lastName">Nom</label>
+              <input
+                id="lastName"
+                type="text"
+                name="lastName"
+                aria-labelledby="lastName"
+              />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                aria-labelledby="email"
+                autocomplete="on"
+              />
+            </div>
+            <div>
+              <label for="message_area">Votre message</label>
+              <textarea
+                id="message_area"
+                name="message"
+                aria-labelledby="message_area"
+              ></textarea>
+            </div>
+          </div>
+
+          <button class="button submit_button" type="submit" aria-label="Send">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>

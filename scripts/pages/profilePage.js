@@ -1,4 +1,5 @@
 import { mediasCard } from "../templates/mediasCard.js";
+import { initContactForm } from "../utils/contactForm.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
 
 const articleSection = document.querySelector(".photograph_article");
@@ -33,6 +34,7 @@ export function photographerProfile(data) {
   infoProfile.appendChild(photographerLocation);
   infoProfile.appendChild(photographerTagline);
   photoProfile.appendChild(photographerPortrait);
+  initContactForm(name);
 }
 
 function getPhotographerData(media, id) {
@@ -53,17 +55,16 @@ async function init() {
     return photographer.id === parseInt(idPage);
   });
   const currentMedias = getPhotographerData(media, idPage);
-  console.log("media:", media);
-  console.log("Current medias:", currentMedias);
+
   photographerProfile(currentPhotographer[0]);
 
   if (currentMedias) {
     currentMedias.forEach((item) => {
-      console.log(item);
       articleSection.appendChild(mediasCard(item));
     });
   } else {
     console.error("myArray is undefined or not an array");
   }
 }
+
 init();
