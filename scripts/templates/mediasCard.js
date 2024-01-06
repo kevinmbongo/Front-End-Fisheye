@@ -1,35 +1,38 @@
-export function mediasCard(data) {
-  const { title, likes, video, image } = data;
-  const isVideo = data.hasOwnProperty("video");
+export class mediasCard {
+  constructor(data) {
+    const { title, likes, video, image } = data;
+    this.title = title;
+    this.likes = likes;
+    this.isVideo = data.hasOwnProperty("video");
+    this.cardMediaSrc = this.isVideo
+      ? `assets/videos/profilePages/videos/${video}`
+      : `assets/images/profilePages/images/${image}`;
+  }
 
-  const cardMediaSrc = isVideo
-    ? `assets/videos/profilePages/videos/${video}`
-    : `assets/images/profilePages/images/${image}`;
-
-  function getArticleDOM() {
+  getArticleDOM() {
     const articlePhoto = document.createElement("article");
     const infoPicture = document.createElement("div");
     const likesContainer = document.createElement("div");
     likesContainer.setAttribute("class", "likes_container");
 
     const titleImg = document.createElement("span");
-    titleImg.textContent = title;
+    titleImg.textContent = this.title;
 
     const likesArticle = document.createElement("span");
     likesArticle.setAttribute("class", "likes_value");
     likesArticle.setAttribute("tabindex", 0);
-    likesArticle.textContent = likes;
+    likesArticle.textContent = this.likes;
 
     const snackbar = document.querySelector(".snackbar");
 
-    const mediaTag = isVideo
+    const mediaTag = this.isVideo
       ? document.createElement("video")
       : document.createElement("img");
 
-    mediaTag.setAttribute("alt", `${title}, closeup view`);
-    mediaTag.setAttribute("aria-label", title);
+    mediaTag.setAttribute("alt", `${this.title}, closeup view`);
+    mediaTag.setAttribute("aria-label", this.title);
     mediaTag.setAttribute("class", "picture");
-    mediaTag.setAttribute("src", cardMediaSrc);
+    mediaTag.setAttribute("src", this.cardMediaSrc);
     mediaTag.setAttribute("tabindex", 0);
 
     const svgElement = document.createElement("div");
@@ -45,12 +48,10 @@ export function mediasCard(data) {
     likesContainer.appendChild(likesArticle);
     likesContainer.appendChild(svgElement);
     svgElement.addEventListener("click", () => {
-      const newLikes = likes + 1;
+      const newLikes = this.likes + 1;
       likesArticle.textContent = newLikes;
     });
 
     return articlePhoto;
   }
-
-  return getArticleDOM();
 }

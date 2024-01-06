@@ -1,5 +1,5 @@
 import { mediasCard } from "../templates/mediasCard.js";
-import { initContactForm } from "../utils/contactForm.js";
+import { contactFormModal } from "../utils/contactFormModal.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
 
 const articleSection = document.querySelector(".photograph_article");
@@ -29,12 +29,13 @@ export function photographerProfile(data) {
     `assets/images/portraits/${portrait}`
   );
   photographerPortrait.setAttribute("alt", name);
-
   infoProfile.appendChild(photographerName);
   infoProfile.appendChild(photographerLocation);
   infoProfile.appendChild(photographerTagline);
   photoProfile.appendChild(photographerPortrait);
-  initContactForm(name);
+
+  const contactForm = new contactFormModal();
+  contactForm.initContactForm(name);
 }
 
 function getPhotographerData(media, id) {
@@ -60,7 +61,10 @@ async function init() {
 
   if (currentMedias) {
     currentMedias.forEach((item) => {
-      articleSection.appendChild(mediasCard(item));
+      const data = item;
+      const mediaCard = new mediasCard(data);
+      const articleDOM = mediaCard.getArticleDOM();
+      articleSection.appendChild(articleDOM);
     });
   } else {
     console.error("myArray is undefined or not an array");
