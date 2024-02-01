@@ -1,5 +1,7 @@
-export class contactFormModal {
+import { modalManager } from "./modalManager.js";
+export class contactFormModal extends modalManager {
   constructor() {
+    super("contact_modal");
     this.errorMessage =
       "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
     this.emailMessage = "Veuillez entrer une adresse mail valide.";
@@ -42,20 +44,6 @@ export class contactFormModal {
     );
 
     this.namePhotographer = document.getElementById("name_photographer");
-  }
-
-  displayModal() {
-    this.modal.style.display = "block";
-  }
-
-  closeModal() {
-    this.modal.style.display = "none";
-  }
-
-  handleKeyDown(event) {
-    if (event.key === "Escape" && this.modal.style.display === "block") {
-      this.closeModal();
-    }
   }
 
   // check the validity of value

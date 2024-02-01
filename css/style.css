@@ -1,6 +1,7 @@
 @import url("photographer/photographer.css");
 @import url("photographer/sort.css");
 @import url("photographer/modal.css");
+@import url("photographer/lightbox.css");
 a {
   text-decoration: none;
   color: inherit;

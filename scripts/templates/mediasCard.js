@@ -1,6 +1,9 @@
+import { lightbox } from "../utils/lightbox.js";
+
 export class mediasCard {
   constructor(data) {
-    const { title, likes, video, image } = data;
+    const { title, likes, video, image, id } = data;
+    this.id = id;
     this.title = title;
     this.likes = likes;
     this.isVideo = data.hasOwnProperty("video");
@@ -11,6 +14,7 @@ export class mediasCard {
 
   getArticleDOM() {
     const articlePhoto = document.createElement("article");
+    const mediaContainer = document.createElement("a");
     const infoPicture = document.createElement("div");
     const likesContainer = document.createElement("div");
     likesContainer.setAttribute("class", "likes_container");
@@ -23,12 +27,11 @@ export class mediasCard {
     likesArticle.setAttribute("tabindex", 0);
     likesArticle.textContent = this.likes;
 
-    const snackbar = document.querySelector(".snackbar");
-
     const mediaTag = this.isVideo
       ? document.createElement("video")
       : document.createElement("img");
 
+    mediaTag.setAttribute("id", this.id);
     mediaTag.setAttribute("alt", `${this.title}, closeup view`);
     mediaTag.setAttribute("aria-label", this.title);
     mediaTag.setAttribute("class", "picture");
@@ -40,7 +43,10 @@ export class mediasCard {
       '<i class="fa-solid fa-heart" style="color: #901c1c;"></i>';
     svgElement.setAttribute("class", "svg_heart");
 
-    articlePhoto.appendChild(mediaTag);
+    articlePhoto.appendChild(mediaContainer);
+    mediaContainer.appendChild(mediaTag);
+    mediaContainer.setAttribute("href", this.cardMediaSrc);
+    mediaContainer.setAttribute("id", `articleId${this.id}`);
     articlePhoto.setAttribute("class", "articleTest");
     articlePhoto.appendChild(infoPicture);
     infoPicture.appendChild(titleImg);
@@ -50,6 +56,13 @@ export class mediasCard {
     svgElement.addEventListener("click", () => {
       const newLikes = this.likes + 1;
       likesArticle.textContent = newLikes;
+
+      let totalLikeSpan = document.querySelector(
+        ".profile_likes_container span"
+      );
+      const contentNumber = parseFloat(totalLikeSpan.textContent);
+      totalLikeSpan.textContent = contentNumber + 1;
+      console.log(contentNumber);
     });
 
     return articlePhoto;
