@@ -45,12 +45,70 @@
       <!-- ********************* Sort ********************** -->
       <section class="sort">
         <i id="Order by">Trier par</i>
+        <div id="sort_container" class="sortContainer">
+          <button
+            class="button sortBtn"
+            id="current_sort"
+            value=""
+            aria-expanded="false"
+            aria-controls="optionContainer"
+            aria-labelledby="Order by"
+            tabindex="0"
+          >
+            <span id="currentText">Popularité</span>
+            <span id="openList">
+              <i class="fa-solid fa-chevron-up"></i>
+            </span>
+          </button>
+
+          <div
+            id="option_container"
+            class="optionContainer"
+            role="listbox"
+            aria-activedescendant="currentSort"
+            aria-selected="true"
+            aria-labelledby="filter-label"
+          >
+            <button
+              id="popular"
+              class="button sortBtn"
+              value="popular"
+              role="option"
+              aria-selected="true"
+              tabindex="0"
+            >
+              Popularité
+              <span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </button>
+            <hr />
+            <button
+              id="date"
+              class="button sortBtn"
+              value="date"
+              role="option"
+              tabindex="0"
+            >
+              Date
+            </button>
+            <hr />
+            <button
+              id="title"
+              class="button sortBtn"
+              value="title"
+              role="option"
+              tabindex="0"
+            >
+              Titre
+            </button>
+          </div>
+        </div>
       </section>
       <section id="photograph_article" class="photograph_article"></section>
 
-      <div class="snackbar"></div>
-
       <!-- ********************* Lightbox ********************** -->
+      <div class="snackbar"></div>
     </main>
     <!-- ********************* Modal contact ********************** -->
     <div id="contact_modal" aria-labelledby="name_photographer" class="blur">

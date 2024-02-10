@@ -2,6 +2,7 @@ import { mediasCard } from "../templates/mediasCard.js";
 import { contactFormModal } from "../utils/contactFormModal.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
 import { lightbox } from "../utils/lightbox.js";
+import { sorting } from "../utils/sorting.js";
 
 const articleSection = document.querySelector(".photograph_article");
 let totalLikes = 0;
@@ -66,24 +67,76 @@ async function init() {
     return photographer.id === parseInt(idPage);
   });
   const currentMedias = getPhotographerData(media, idPage);
-  console.log("profilPage");
+
   photographerProfile(currentPhotographer[0]);
-  const nextArrow = document.querySelector(".lightbox_next");
+  const sortingInstance = new sorting(currentMedias);
+  const currentSort = document.getElementById("current_sort");
+  const popularSort = document.getElementById("popular");
+  const dateSort = document.getElementById("date");
+  const titleSort = document.getElementById("title");
+
+  function createArticles(item) {
+    const data = item;
+    const mediaCard = new mediasCard(data);
+    const articleDOM = mediaCard.getArticleDOM();
+    articleSection.appendChild(articleDOM);
+  }
+
+  popularSort.addEventListener("click", () => {
+    sortingInstance.sortByPopularity(currentMedias);
+    articleSection.innerHTML = "";
+
+    if (currentMedias) {
+      currentMedias.forEach((item) => {
+        createArticles(item);
+      });
+      lightbox.init();
+    } else {
+      console.error("myArray is undefined or not an array");
+    }
+  });
+
+  titleSort.addEventListener("click", () => {
+    sortingInstance.sortByTitle(currentMedias);
+    articleSection.innerHTML = "";
+
+    if (currentMedias) {
+      currentMedias.forEach((item) => {
+        createArticles(item);
+      });
+      lightbox.init();
+    } else {
+      console.error("myArray is undefined or not an array");
+    }
+  });
+
+  dateSort.addEventListener("click", () => {
+    sortingInstance.sortByDate(currentMedias);
+    articleSection.innerHTML = "";
+    console.log(currentMedias);
+    if (currentMedias) {
+      currentMedias.forEach((item) => {
+        createArticles(item);
+      });
+      lightbox.init();
+    } else {
+      console.error("myArray is undefined or not an array");
+    }
+  });
+  // Première initialisation de currentMedias trié par popularité
+  sortingInstance.sortByPopularity(currentMedias);
 
   if (currentMedias) {
-    currentMedias.forEach((item, index) => {
-      const data = item;
-      const mediaCard = new mediasCard(data);
-      const articleDOM = mediaCard.getArticleDOM();
-      articleSection.appendChild(articleDOM);
-      const currentId = articleDOM.querySelector("a").id;
-      const currentSrc = articleDOM
-        .querySelector("a .picture")
-        .getAttribute("src");
-      const svgElements = document.querySelectorAll(".svg_heart");
-      const likesArticle = document.querySelector(".likes_value");
+    currentMedias.forEach((item) => {
+      createArticles(item);
+      // const currentId = articleDOM.querySelector("a").id;
+      // const currentSrc = articleDOM
+      //   .querySelector("a .picture")
+      //   .getAttribute("src");
+      // const svgElements = document.querySelectorAll(".svg_heart");
+      // const likesArticle = document.querySelector(".likes_value");
 
-      const currentTitle = articleDOM.querySelector("div span").textContent;
+      // const currentTitle = articleDOM.querySelector("div span").textContent;
 
       // incrémentation du total des likes
 
@@ -92,14 +145,7 @@ async function init() {
       }
 
       totalLikeSpan.textContent = totalLikes;
-
-      // const myLightbox = new lightbox(currentId);
-
-      // articleDOM.addEventListener("click", () =>
-      //   myLightbox.showMyLightbox(currentSrc, currentTitle)
-      // );
     });
-
     lightbox.init();
   } else {
     console.error("myArray is undefined or not an array");

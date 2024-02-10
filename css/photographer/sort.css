@@ -1,4 +1,5 @@
 /********************** sort **********************/
+
 .sort {
   margin: 30px 0 60px 0;
   font-size: 18px;
@@ -14,4 +15,44 @@
 }
 .sortContainer {
   position: relative;
+}
+
+.sortBtn {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  outline: none;
+}
+
+.sortBtn:hover {
+  background-color: #db8876;
+  color: black;
+}
+
+/* Styles des options */
+.optionContainer {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  display: none;
+  flex-direction: column;
+  width: 170px;
+  background-color: #901c1c;
+  color: #333;
+  font-size: 14px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.optionContainer hr {
+  width: 90%;
+  margin: auto;
+  padding: 0;
+}
+
+.optionContainer svg {
+  transform: rotate(180deg);
 }

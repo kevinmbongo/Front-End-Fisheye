@@ -30,7 +30,6 @@ export class lightbox {
    * @param {string} URL de l'image
    * @param {string[]} chemins des images de la lightbox
    */
-
   constructor(url, images) {
     // Création de l'élément DOM
 
