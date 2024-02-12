@@ -1,12 +1,14 @@
 import { mediasCard } from "../templates/mediasCard.js";
 import { contactFormModal } from "../utils/contactFormModal.js";
 import { getPhotographers } from "../utils/getPhotographersJSON.js";
+import { someLikes } from "../utils/someLikes.js";
 import { lightbox } from "../utils/lightbox.js";
 import { sorting } from "../utils/sorting.js";
 
 const articleSection = document.querySelector(".photograph_article");
 let totalLikes = 0;
 const totalLikeSpan = document.createElement("span");
+const buttons = document.querySelectorAll(".button");
 
 export function photographerProfile(data) {
   const { name, portrait, city, country, tagline, price } = data;
@@ -80,6 +82,7 @@ async function init() {
     const mediaCard = new mediasCard(data);
     const articleDOM = mediaCard.getArticleDOM();
     articleSection.appendChild(articleDOM);
+    someLikes(totalLikeSpan);
   }
 
   popularSort.addEventListener("click", () => {
@@ -129,14 +132,6 @@ async function init() {
   if (currentMedias) {
     currentMedias.forEach((item) => {
       createArticles(item);
-      // const currentId = articleDOM.querySelector("a").id;
-      // const currentSrc = articleDOM
-      //   .querySelector("a .picture")
-      //   .getAttribute("src");
-      // const svgElements = document.querySelectorAll(".svg_heart");
-      // const likesArticle = document.querySelector(".likes_value");
-
-      // const currentTitle = articleDOM.querySelector("div span").textContent;
 
       // incrémentation du total des likes
 
@@ -146,10 +141,21 @@ async function init() {
 
       totalLikeSpan.textContent = totalLikes;
     });
+
+    someLikes(totalLikeSpan);
     lightbox.init();
   } else {
     console.error("myArray is undefined or not an array");
   }
+  buttons.forEach((button) => {
+    button.addEventListener("focus", () => {
+      button.classList.add("focused");
+    });
+
+    button.addEventListener("blur", () => {
+      button.classList.remove("focused");
+    });
+  });
 }
 
 init();

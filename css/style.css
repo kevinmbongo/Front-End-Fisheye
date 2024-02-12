@@ -24,6 +24,10 @@ h1 {
   color: #901c1c;
   margin-right: 100px;
 }
+.focused {
+  background-color: #db8876;
+  color: black;
+}
 
 .logo {
   height: 50px;

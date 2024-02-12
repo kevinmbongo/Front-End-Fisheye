@@ -78,6 +78,10 @@ export class lightbox {
    * @param {KeyboardEvent} e
    */
   onKeyUp(e) {
+    const links = Array.from(
+      document.querySelectorAll(`a[href$=".jpg"], a[href$=".mp4"]`)
+    );
+    const images = links.map((link) => link.getAttribute("href"));
     if (e.key === "Escape") {
       this.close(e);
     } else if (e.key === "ArrowLeft") {
@@ -85,7 +89,7 @@ export class lightbox {
     } else if (e.key === "ArrowRight") {
       this.next(e);
     } else if (e.key === "Enter") {
-      this.next(e);
+      new lightbox(e.target.getAttribute("href"), images);
     }
   }
 

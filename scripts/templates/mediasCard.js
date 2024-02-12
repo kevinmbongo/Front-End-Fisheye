@@ -46,6 +46,7 @@ export class mediasCard {
     articlePhoto.appendChild(mediaContainer);
     mediaContainer.appendChild(mediaTag);
     mediaContainer.setAttribute("href", this.cardMediaSrc);
+    mediaContainer.setAttribute("title", this.cardMediaSrc);
     mediaContainer.setAttribute("id", `articleId${this.id}`);
     articlePhoto.setAttribute("class", "articleTest");
     articlePhoto.appendChild(infoPicture);
@@ -60,11 +61,10 @@ export class mediasCard {
       let totalLikeSpan = document.querySelector(
         ".profile_likes_container span"
       );
-      const contentNumber = parseFloat(totalLikeSpan.textContent);
-      totalLikeSpan.textContent = contentNumber + 1;
-      console.log(contentNumber);
+      // const contentNumber = parseFloat(totalLikeSpan.textContent);
+      // totalLikeSpan.textContent = contentNumber + 1;
+      // console.log(contentNumber);
     });
-
     return articlePhoto;
   }
 }
