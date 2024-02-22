@@ -23,7 +23,7 @@
   opacity: 0.4;
   text-indent: -3000px;
   cursor: pointer;
-  transition: opacity 0.3s all ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .lightbox button:hover {

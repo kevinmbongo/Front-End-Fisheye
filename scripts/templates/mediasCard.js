@@ -1,5 +1,3 @@
-import { lightbox } from "../utils/lightbox.js";
-
 export class mediasCard {
   constructor(data) {
     const { title, likes, video, image, id } = data;
@@ -11,7 +9,6 @@ export class mediasCard {
       ? `assets/videos/profilePages/videos/${video}`
       : `assets/images/profilePages/images/${image}`;
   }
-
   getArticleDOM() {
     const articlePhoto = document.createElement("article");
     const mediaContainer = document.createElement("a");
@@ -46,7 +43,7 @@ export class mediasCard {
     articlePhoto.appendChild(mediaContainer);
     mediaContainer.appendChild(mediaTag);
     mediaContainer.setAttribute("href", this.cardMediaSrc);
-    mediaContainer.setAttribute("title", this.cardMediaSrc);
+    mediaContainer.setAttribute("title", this.title);
     mediaContainer.setAttribute("id", `articleId${this.id}`);
     articlePhoto.setAttribute("class", "articleTest");
     articlePhoto.appendChild(infoPicture);
@@ -57,13 +54,6 @@ export class mediasCard {
     svgElement.addEventListener("click", () => {
       const newLikes = this.likes + 1;
       likesArticle.textContent = newLikes;
-
-      let totalLikeSpan = document.querySelector(
-        ".profile_likes_container span"
-      );
-      // const contentNumber = parseFloat(totalLikeSpan.textContent);
-      // totalLikeSpan.textContent = contentNumber + 1;
-      // console.log(contentNumber);
     });
     return articlePhoto;
   }

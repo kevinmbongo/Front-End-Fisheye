@@ -9,19 +9,29 @@ export class lightbox {
       document.querySelectorAll(`a[href$=".jpg"], a[href$=".mp4"]`)
     );
     const images = links.map((link) => link.getAttribute("href"));
+
     links.forEach((link) =>
       link.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
           e.preventDefault();
-          console.log(e.currentTarget.getAttribute("href"));
-          new lightbox(e.currentTarget.getAttribute("href"), images);
+
+          new lightbox(
+            e.currentTarget.getAttribute("href"),
+            images,
+            e.currentTarget.getAttribute("title")
+          );
         }
       })
     );
     links.forEach((link) =>
       link.addEventListener("click", (e) => {
         e.preventDefault();
-        new lightbox(e.currentTarget.getAttribute("href"), images);
+        // console.log(e.currentTarget.getAttribute("title"));
+        new lightbox(
+          e.currentTarget.getAttribute("href"),
+          images,
+          e.currentTarget.getAttribute("title")
+        );
       })
     );
   }
@@ -30,10 +40,13 @@ export class lightbox {
    * @param {string} URL de l'image
    * @param {string[]} chemins des images de la lightbox
    */
-  constructor(url, images) {
+  constructor(url, images, title) {
     // Création de l'élément DOM
 
-    this.element = this.buildDOM(url);
+    this.currentTitle = title;
+    // console.log(this.currentTitle);
+    this.updateTitle(title);
+    this.element = this.buildDOM(title);
     this.images = images;
     this.loadImage(url);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -62,6 +75,7 @@ export class lightbox {
         container.removeChild(loader);
         container.appendChild(video);
         this.url = url;
+        this.updateTitle(this.currentTitle);
       };
     } else {
       image.src = url;
@@ -70,6 +84,7 @@ export class lightbox {
         container.removeChild(loader);
         container.appendChild(image);
         this.url = url;
+        this.updateTitle(this.currentTitle);
       };
     }
   }
@@ -86,10 +101,15 @@ export class lightbox {
       this.close(e);
     } else if (e.key === "ArrowLeft") {
       this.prev(e);
+      console.log(e.currentTarget.getAttribute("title"));
     } else if (e.key === "ArrowRight") {
       this.next(e);
     } else if (e.key === "Enter") {
-      new lightbox(e.target.getAttribute("href"), images);
+      new lightbox(
+        e.target.getAttribute("href"),
+        images,
+        e.target.getAttribute("title")
+      );
     }
   }
 
@@ -117,6 +137,7 @@ export class lightbox {
       i = -1;
     }
     this.loadImage(this.images[i + 1]);
+    this.updateTitle(this.currentTitle);
   }
 
   /**
@@ -130,18 +151,20 @@ export class lightbox {
       i = this.images.length;
     }
     this.loadImage(this.images[i - 1]);
+    this.updateTitle(this.currentTitle);
   }
 
   /**
    * @param {string} URL de l'image
    */
-  buildDOM(url) {
+  buildDOM(title) {
     const dom = document.createElement("div");
     dom.classList.add("lightbox");
     dom.setAttribute("id", "myLightbox");
     dom.setAttribute("role", "dialog");
     dom.setAttribute("aria-labelledby", "lightboxTitle");
     dom.setAttribute("aria-modal", "true");
+
     dom.innerHTML = `<button
           class="lightbox_close"
           id="closeMyLightboxBtn"
@@ -153,6 +176,9 @@ export class lightbox {
 
         <div class="lightbox_container" id="myLightboxMedia">
         </div>`;
+
+    const lightboxTitleElement = document.querySelector(".lightbox_title");
+    // console.log(lightboxTitleElement);
 
     dom
       .querySelector(".lightbox_close")
@@ -167,5 +193,20 @@ export class lightbox {
       .addEventListener("click", this.prev.bind(this));
 
     return dom;
+  }
+
+  /**
+   * Met à jour le titre de la lightbox
+   * @param {string} title - Le nouveau titre
+   */
+  updateTitle(title) {
+    if (this.element) {
+      const lightboxTitleElement =
+        this.element.querySelector(".lightbox_title");
+      if (lightboxTitleElement) {
+        lightboxTitleElement.textContent = title;
+      }
+    }
+    console.log(title);
   }
 }
